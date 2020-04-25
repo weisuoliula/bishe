@@ -86,6 +86,9 @@ export const articlecontent = (id) => http({
 export const bookpic = (file) => http({
     type: "post",
     url: "/api/upload/urlImage",
+    headers: {
+        'Content-Type': 'multipart/form-data'
+       },
     data: file,
     processData: false,
     cache: false,

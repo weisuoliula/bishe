@@ -44,22 +44,6 @@ import { register, login } from "@api/recommend";
 export default {
   name: "Register",
   data() {
-    /*   var checkAge = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error("年龄不能为空"));
-      }
-      setTimeout(() => {
-        if (!Number.isInteger(value)) {
-          callback(new Error("请输入数字值"));
-        } else {
-          if (value < 18) {
-            callback(new Error("必须年满18岁"));
-          } else {
-            callback();
-          }
-        }
-      }, 1000);
-    }; */
     var validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入账号"));
@@ -93,22 +77,12 @@ export default {
   },
   methods: {
     async submitForm() {
-      /* this.$refs[formName].validate(valid => {
-        if (valid) {
-          alert("submit!");
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      }); */
-      //console.log(this.ruleForm.pass,this.ruleForm.checkPass)
       let data = await login(this.ruleForm.pass, this.ruleForm.checkPass);
-      //console.log(data);
-      this.$router.push("/index");
+      if (data.code == 200) {
+        this.$message.success("登录成功!");
+        this.$router.push("/index");
+      }
     },
-    /*  resetForm(formName) {
-      this.$refs[formName].resetFields();
-    } */
     handletoggle() {
       this.$router.push("/log");
     }

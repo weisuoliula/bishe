@@ -1,42 +1,41 @@
 <template>
-<div class="login_box">
-      <div class="login">
-    <el-form
-      :model="ruleForm"
-      status-icon
-      :rules="rules"
-      ref="ruleForm"
-      label-width="100px"
-      class="demo-ruleForm"
-    >
-      <el-form-item label="账号" prop="pass">
-        <el-input type="text" v-model="ruleForm.pass" autocomplete="off" placeholder="请输入账号"></el-input>
-      </el-form-item>
-      <el-form-item label="密码" prop="checkPass">
-        <el-input
-          type="password"
-          v-model="ruleForm.checkPass"
-          autocomplete="off"
-          placeholder="请输入密码"
-        ></el-input>
-      </el-form-item>
-      <!--  <el-form-item label="年龄" prop="age">
+  <div class="login_box">
+    <div class="login">
+      <el-form
+        :model="ruleForm"
+        status-icon
+        :rules="rules"
+        ref="ruleForm"
+        label-width="100px"
+        class="demo-ruleForm"
+      >
+        <el-form-item label="账号" prop="pass">
+          <el-input type="text" v-model="ruleForm.pass" autocomplete="off" placeholder="请输入账号"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="checkPass">
+          <el-input
+            type="password"
+            v-model="ruleForm.checkPass"
+            autocomplete="off"
+            placeholder="请输入密码"
+          ></el-input>
+        </el-form-item>
+        <!--  <el-form-item label="年龄" prop="age">
         <el-input v-model.number="ruleForm.age"></el-input>
-      </el-form-item>-->
-      <p @click="toggle()">账号已注册,请登录</p>
-      <el-form-item>
-        <el-button
-          type="primary"
-          @click="submitForm('ruleForm')"
-          class="tijiao"
-          style="width:100%"
-        >注册</el-button>
-        <!--  <el-button @click="resetForm('ruleForm')">重置</el-button> -->
-      </el-form-item>
-    </el-form>
+        </el-form-item>-->
+        <p @click="toggle()">账号已注册,请登录</p>
+        <el-form-item>
+          <el-button
+            type="primary"
+            @click="submitForm('ruleForm')"
+            class="tijiao"
+            style="width:100%"
+          >注册</el-button>
+          <!--  <el-button @click="resetForm('ruleForm')">重置</el-button> -->
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
-</div>
-
 </template>
 
 <script>
@@ -103,25 +102,27 @@ export default {
         }
       }); */
       //console.log(this.ruleForm.pass,this.ruleForm.checkPass)
-      let data = await register(this.ruleForm.pass,this.ruleForm.checkPass);
-      console.log(data);
-      this.$router.push("/sign")
+      let data = await register(this.ruleForm.pass, this.ruleForm.checkPass);
+      if (data.code == 200) {
+        this.$message.success("注册成功!");
+        this.$router.push("/sign");
+      }
     },
     /*  resetForm(formName) {
       this.$refs[formName].resetFields();
     } */
-  toggle(){
-     this.$router.push("/sign");
-  }
+    toggle() {
+      this.$router.push("/sign");
+    }
   }
 };
 </script>
 
 <style scoped>
-.login_box{
+.login_box {
   width: 100%;
   height: 100%;
-  background: url("http://localhost:8080/img/bg.png") no-repeat; 
+  background: url("http://localhost:8080/img/bg.png") no-repeat;
 }
 .login {
   width: 400px;

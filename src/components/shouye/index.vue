@@ -1,5 +1,5 @@
 <template>
-    <div class="shouyebox">index</div>
+    <div class="shouyebox">汇总</div>
 </template>
 
 <script>
